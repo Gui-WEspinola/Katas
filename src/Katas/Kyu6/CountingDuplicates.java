@@ -1,16 +1,28 @@
 package Katas.Kyu6;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class CountingDuplicates {
     public static int duplicateCount(String text) {
-        Character[] characters = new Character[text.length()];
-        List<String> inputText = Stream.of(text).collect(Collectors.toList());
 
-        System.out.println(inputText);
+        List<Character> characterList = new ArrayList<>();
+        List<Character> duplicateList = new ArrayList<>();
 
-        return 0;
+        for (int i = 0; i < text.length(); i++) {
+            characterList.add(text.toLowerCase().charAt(i));
+        }
+        for (int i = 0; i < characterList.size(); i++) {
+            for (int j = 0; j < characterList.size(); j++) {
+                if (characterList.get(j) == characterList.get(i)
+                        && i != j
+                        && !duplicateList.contains(characterList.get(j))){
+                    duplicateList.add(characterList.get(j));
+                }
+            }
+        }
+        System.out.println(duplicateList.size());
+        System.out.println(duplicateList);
+        return duplicateList.size();
     }
 }
